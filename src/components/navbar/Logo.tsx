@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { GiUsable } from "react-icons/gi";
+import { GiTwoCoins } from "react-icons/gi";
 
 const Logo = () => {
     const router = useRouter();
@@ -13,7 +13,7 @@ const Logo = () => {
             onClick={() => router.push('/')}
             alt="Logo"
             className="hidden md:block cursor-pointer"
-            height="30"
+            height="5"
             width="30"
             src="/images/logo2.png"
         /> */}
@@ -23,9 +23,9 @@ const Logo = () => {
             items-center
             font-bold
             text-lg
-            gap-1
+            gap-2
         ">
-            <GiUsable size={18} />
+            <GiTwoCoins size={18} />
             Cashoutopia
         </div>
         </div>

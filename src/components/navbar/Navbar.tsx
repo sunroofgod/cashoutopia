@@ -9,8 +9,8 @@ const Navbar = () => {
     <div className="fixed w-full bg-white z-10">
       <div
         className="
-                    py-6
-                    px-10
+                    py-5
+                    px-12
                 "
       >
         <div
