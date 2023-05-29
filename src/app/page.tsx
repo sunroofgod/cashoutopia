@@ -1,7 +1,7 @@
-import Image from 'next/image'
+import { Card } from "@/components/ui/Card"
 
 export default function Home() {
   return (
-    <div className="text-rose-500 text-2xl">Hello AirBnb!</div> 
+    <Card title="We promise you nothing." />
   )
 }
