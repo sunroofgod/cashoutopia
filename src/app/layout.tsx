@@ -2,7 +2,8 @@ import { Nunito } from 'next/font/google'
 
 import './globals.css'
 import Navbar from '@/components/navbar/Navbar'
-import DropdownMenuDemo from '@/components/ui/Dropdown';
+import { DarkmodeToggle } from '@/components/ui/Dropdown';
+import { ThemeProvider } from 'next-themes'
 
 const font = Nunito({ 
   subsets: ['latin'],
@@ -21,10 +22,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={font.className}>
+
         <Navbar />
-        <DropdownMenuDemo />
+
+        <DarkmodeToggle />
         {children}
         </body>
+
     </html>
   )
 }
