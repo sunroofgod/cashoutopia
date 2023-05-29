@@ -15,6 +15,7 @@ export function NavButton({
             opacity-50
             hover:opacity-80
             transition
+            text-base
         ">
         {label}
         </button>

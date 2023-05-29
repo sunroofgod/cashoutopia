@@ -8,8 +8,8 @@ const font = Nunito({
 });
 
 export const metadata = {
-  title: 'Name of App',
-  description: 'Description of App',
+  title: 'Cashoutopia',
+  description: 'Cashoutopia the Web App',
 }
 
 export default function RootLayout({

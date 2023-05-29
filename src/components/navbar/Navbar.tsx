@@ -10,8 +10,7 @@ const Navbar = () => {
       <div
         className="
                     py-6
-                    px-8
-                    
+                    px-10
                 "
       >
         <div
