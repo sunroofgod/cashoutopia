@@ -23,18 +23,19 @@ const Navbar = () => {
                     md:gap-0
                 "
         >
-          <div className="
-            flex
-            flex-row
-            items-centered
-            justify-around
-            gap-3
-            md:gap-8
+          <div
+            className="
+              flex
+              flex-row
+              items-centered
+              justify-around
+              gap-3
+              md:gap-8
           ">
             <Logo />
-            <NavButton label="Horse Racing"/>
-            <NavButton label="Poker"/>
-            <NavButton label="BlackJack"/>
+            <NavButton label="Horse Racing" />
+            <NavButton label="Poker" />
+            <NavButton label="BlackJack" />
 
           </div>
 
