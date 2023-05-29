@@ -6,7 +6,7 @@ import { NavButton } from "./NavButton";
 
 const Navbar = () => {
   return (
-    <div className="fixed w-full bg-white z-10">
+    <div className="w-full bg-white z-10">
       <div
         className="
                     py-5
