@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 
-@layer base {
+/* @layer base {
   html,body,
   :root {
     height: 100%;
@@ -71,14 +71,22 @@
 
   --radius: 0.5rem;
 }
-}
+} */
 
-@layer base {
+/* @layer base {
   * {
     @apply border-border;
   }
   body {
     @apply bg-background text-foreground;
     font-feature-settings: "rlig" 1, "calt" 1;
+  }
+} */
+
+@layer base {
+  html,body,
+  :root {
+    height:100%;
+    @apply dark:bg-black dark:text-gray-100 bg-gray-50 text-gray-900
   }
 }

@@ -4,10 +4,10 @@ import './globals.css'
 import Navbar from '@/components/navbar/Navbar'
 
 import { DarkmodeToggle } from '@/components/ui/Dropdown';
-import { ThemeProvider } from 'next-themes'
+import { ThemeProvider } from '@/components/themeprovider';
 import { Card } from '@/components/ui/Card';
 
-const font = Raleway({ 
+const font = Raleway({
   subsets: ['latin'],
   weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
 });
@@ -15,6 +15,10 @@ const font = Raleway({
 export const metadata = {
   title: 'Cashoutopia',
   description: 'Cashoutopia the Web App',
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "white" },
+    { media: "(prefers-color-scheme: dark)", color: "black" },
+  ]
 }
 
 export default function RootLayout({
@@ -23,15 +27,19 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
+
+    <html className="dark" lang="en" >
       <body className={font.className}>
+      <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          <Navbar />
 
-        <Navbar />
-
-        <DarkmodeToggle />
-        {children}
-        </body>
+          <DarkmodeToggle />
+          {children}
+        </ThemeProvider>
+      </body>
 
     </html>
+
   )
 }
+ 
