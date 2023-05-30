@@ -31,14 +31,13 @@ const Navbar = () => {
               justify-around
               gap-3
               md:gap-8
+
           ">
             <Logo />
             <NavButton label="Horse Racing" />
             <NavButton label="Poker" />
             <NavButton label="BlackJack" />
-
           </div>
-
           <UserMenu />
         </div>
       </div>
