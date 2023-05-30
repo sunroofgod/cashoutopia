@@ -1,17 +1,15 @@
 'use client';
 
 interface CardProps {
-    children?: React.ReactNode
     title: string
     subtitle?: string
-    buttonLabel?: string
+    children?: React.ReactNode
 }
 
 export function Card ({
-    children,
     title,
     subtitle,
-    buttonLabel
+    children,
 }: CardProps) {
     return (
         <div className="
@@ -30,20 +28,8 @@ export function Card ({
             <div>
             <h1 className="text-7xl font-bold pb-4">{title}</h1>
             {subtitle && <p className="text-xl font-normal opacity-50">{subtitle}</p>}
-            {children}
             <br></br>
-            {buttonLabel && <button className="
-                rounded-lg 
-                hover:opacity-80 
-                transition 
-                bg-slate-900
-                text-white 
-                w-36
-                h-12
-                text-base
-            ">
-            {buttonLabel}
-            </button>}
+            {children}
             </div>
         </div>
     )
