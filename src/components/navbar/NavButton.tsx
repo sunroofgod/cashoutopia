@@ -2,13 +2,17 @@
 
 interface NavButtonProps {
     label: string;
+    onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
 export function NavButton({
     label,
+    onClick,
 }: NavButtonProps) {
     return (
-        <button className="
+        <button 
+        onClick={onClick}
+        className="
             flex
             flex-row
             items-center
