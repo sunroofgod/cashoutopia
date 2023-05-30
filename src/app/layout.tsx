@@ -3,7 +3,7 @@ import { Poppins, Raleway } from 'next/font/google'
 import './globals.css'
 import Navbar from '@/components/navbar/Navbar'
 
-import { DarkmodeToggle } from '@/components/ui/Dropdown';
+import { DarkmodeToggle } from '@/components/ui/ModeToggle';
 import { ThemeProvider } from '@/components/themeprovider';
 import { Card } from '@/components/ui/Card';
 

@@ -17,23 +17,34 @@ module.exports = {
         border: "hsl(var(--border))",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
-      }
+      },
+      keyframes: {
+        slideDownAndFade: {
+          from: { opacity: 0, transform: 'translateY(-2px)' },
+          to: { opacity: 1, transform: 'translateY(0)' },
+        },
+        slideLeftAndFade: {
+          from: { opacity: 0, transform: 'translateX(2px)' },
+          to: { opacity: 1, transform: 'translateX(0)' },
+        },
+        slideUpAndFade: {
+          from: { opacity: 0, transform: 'translateY(2px)' },
+          to: { opacity: 1, transform: 'translateY(0)' },
+        },
+        slideRightAndFade: {
+          from: { opacity: 0, transform: 'translateX(-2px)' },
+          to: { opacity: 1, transform: 'translateX(0)' },
+        },
+      },
+      animation: {
+        slideDownAndFade: 'slideDownAndFade 800ms cubic-bezier(0.16, 1, 0.3, 1)',
+        slideLeftAndFade: 'slideLeftAndFade 800ms cubic-bezier(0.16, 1, 0.3, 1)',
+        slideUpAndFade: 'slideUpAndFade 800ms cubic-bezier(0.16, 1, 0.3, 1)',
+        slideRightAndFade: 'slideRightAndFade 800ms cubic-bezier(0.16, 1, 0.3, 1)',
+      },
     },
-  },
-  keyframes: {
-    "accordion-down": {
-      from: { height: 0 },
-      to: { height: "var(--radix-accordion-content-height)" },
-    },
-    "accordion-up": {
-      from: { height: "var(--radix-accordion-content-height)" },
-      to: { height: 0 },
-    },
-  },
-  animation: {
-    "accordion-down": "accordion-down 0.2s ease-out",
-    "accordion-up": "accordion-up 0.2s ease-out",
   },
 
+
   plugins: [],
-}
+};

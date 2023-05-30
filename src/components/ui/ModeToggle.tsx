@@ -13,8 +13,8 @@ export function DarkmodeToggle() {
       <DropdownMenu.Root>
         <DropdownMenu.Trigger asChild>
           <button
-            className="transition data-[state=closed]:animate-accordian-up data-[state=open]:animate-accordion-down min-w-32 rounded-full w-[35px] h-[35px] inline-flex items-center justify-center text-violet11 bg-white dark:bg-black outline-none hover:ring-2 hover:ring-gray-300 focus:shadow-[0_0_0_2px] focus:shadow-black"
-            aria-label="Customise options"
+            className="min-w-32 rounded-full w-[35px] h-[35px] inline-flex items-center justify-center text-violet11 bg-white dark:bg-black outline-none hover:ring-2 hover:ring-gray-300 focus:shadow-[0_0_0_2px] focus:shadow-black"
+            aria-label="Mode toggle"
           >
             
             < BsFillSunFill className="rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" size={10} />
