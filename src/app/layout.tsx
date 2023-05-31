@@ -5,7 +5,6 @@ import Navbar from '@/components/navbar/Navbar'
 
 import { DarkmodeToggle } from '@/components/ui/ModeToggle';
 import { ThemeProvider } from '@/components/themeprovider';
-import { Card } from '@/components/ui/Card';
 
 const font = Raleway({
   subsets: ['latin'],
@@ -32,14 +31,10 @@ export default function RootLayout({
       <body className={font.className}>
       <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <Navbar />
-
           <DarkmodeToggle />
           {children}
         </ThemeProvider>
       </body>
-
     </html>
-
   )
 }
- 
