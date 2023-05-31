@@ -30,7 +30,7 @@ const Navbar = () => {
             <Logo />
             <NavButton label="Horse Racing" onClick={() => router.push('/horseracing')} />
             <NavButton label="Poker" />
-            <NavButton label="BlackJack" />
+            <NavButton label="BlackJack" onClick={() => router.push('/blackjack')} />
           </div>
           <UserMenu />
         </div>
