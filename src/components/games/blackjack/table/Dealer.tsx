@@ -15,7 +15,9 @@ export function Dealer ({
           flex-col
           items-center
           justify-center
-          min-h-[40vh]
+          min-h-[30vh]
+          pb-7
+          pt-2
         ">
           <h1 className="font-bold">Dealer</h1>
           <br></br>
