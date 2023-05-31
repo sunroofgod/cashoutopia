@@ -28,7 +28,7 @@ export function GameCard ({
             <div className="justify-start text-left">
               {top_left && <p className="text-xl font-normal">{top_left}</p>}
             </div>
-            <div className="justify-end text-right">
+            <div className="flex justify-end text-right">
               {bottom_right}
             </div>
         </div>
