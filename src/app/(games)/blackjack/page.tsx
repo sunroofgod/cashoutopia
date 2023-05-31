@@ -1,9 +1,7 @@
-import { Card } from "@/components/ui/Card"
-import { GameCard } from "@/components/games/GameCard"
-import { BsFillSuitSpadeFill } from "react-icons/bs"
-export default function HorseRacing() {
+import { BlackJack } from "@/components/games/blackjack/BlackJack"
+
+export default function BlackJackPage() {
   return (
-    <Card children={<GameCard top_left="A" bottom_right={<BsFillSuitSpadeFill size="23"/>} border={true}/>} 
-    />
+    <BlackJack />
   )
 }
