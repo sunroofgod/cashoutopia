@@ -1,6 +1,6 @@
 'use client';
-import { GameCard } from "../GameCard";
-import { BsFillSuitSpadeFill } from "react-icons/bs"; 
+import { Dealer } from "./table/Dealer";
+import { Player } from "./table/Player";
 
 interface BlackJackTableProps {
 }
@@ -10,10 +10,18 @@ export function BlackJackTable ({
     return (
         <div className="
           flex
-          justify-center
-          items-center 
+          flex-col
+          justify-between
+          min-h-[80vh]
+          px-4
         ">
-          <GameCard top_left="7" bottom_right={<BsFillSuitSpadeFill size={23}/>} border={true} />
+          <div>
+            <Dealer />
+          </div>
+          <hr></hr>
+          <div>
+            <Player />
+          </div>
         </div>
     )
 }

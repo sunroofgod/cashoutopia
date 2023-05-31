@@ -1,20 +1,22 @@
 'use client';
 
-import { IconType } from "react-icons";
-
 interface GameCardProps {
     top_left?: string 
     bottom_right?: React.ReactNode
     border?: boolean
+    colour?: boolean
 }
 
 export function GameCard ({
     top_left,
     bottom_right,
     border,
+    colour,
 }: GameCardProps) {
     return (
         <div className={`
+          bg-white
+          mx-1
           w-24
           h-36
           grid
@@ -23,10 +25,15 @@ export function GameCard ({
           py-4
           border-2
           content-between
-          ${border ? 'border-black' : 'border-slate-400/25' }
+          ${border ? 'shadow-lg' : 'border-slate-400/30' }
+          ${border ? 'border-none': 'border-dashed'}
         `}>
-            <div className="justify-start text-left">
-              {top_left && <p className="text-xl font-normal">{top_left}</p>}
+            <div className={`
+              justify-start 
+              text-left
+              ${colour? 'text-black': 'text-red-500'}
+            `}>
+              {top_left && <p className="text-2xl font-medium text-{}">{top_left}</p>}
             </div>
             <div className="flex justify-end text-right">
               {bottom_right}
