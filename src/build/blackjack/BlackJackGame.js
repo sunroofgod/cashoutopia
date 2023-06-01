@@ -1,4 +1,6 @@
 //creates unshuffled Deck
+import { SelectSuit } from "@/components/games/blackjack/temp/SelectSuit"
+
 function CreateDeck() {
   const Deck = []
   const Suits = ["Heart", "Club", "Diamond", "Spade"]
@@ -37,23 +39,43 @@ export function BlackJackGame() {
   var gameState = 0;
   let dealerHand = [];
   let playerHand = [];
+  let dealer = [];
+  let player = [];
+  let shownDealerHand = [];
+  console.log(1);
 
   while (true) {
     if (gameState === 0) {
       deck = ShuffleDeck(CreateDeck());
-      dealerHand = [];
-      playerHand = [];
+      dealer = [];
+      player = [];
       gameState = 1;
     }
     // else should allow player to do actions & receive inputs
     else {
-      dealerHand.push(DrawCard(ShuffledDeck));
-      playerHand.push(DrawCard(ShuffledDeck)); 
-      dealerHand.push(DrawCard(ShuffledDeck));
-      playerHand.push(DrawCard(ShuffledDeck));
+      dealer.push(DrawCard(ShuffledDeck));
+      player.push(DrawCard(ShuffledDeck)); 
+      dealer.push(DrawCard(ShuffledDeck));
+      player.push(DrawCard(ShuffledDeck));
+
+      for (let i of player) {
+        let CardNumber = i.card;
+        let Suit = SelectSuit(i.suit);
+        let Black = true
+        playerHand.push([CardNumber, Suit, Black]);
+      }
+
+      for (let i of dealer) {
+        let CardNumber = i.card;
+        let Suit = SelectSuit(i.suit);
+        let Black = true
+        dealerHand.push([CardNumber, Suit, Black]);
+      }
+
+      shownDealerHand = [dealerHand[0]]
 
       return(
-        [playerHand, dealerHand]
+        [playerHand, dealerHand, shownDealerHand, ShuffledDeck]
       )
     }
   }
