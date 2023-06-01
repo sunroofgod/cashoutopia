@@ -1,42 +1,43 @@
 'use client';
 import { Dealer } from "./table/Dealer";
 import { Player } from "./table/Player";
-
-import { SelectSuit } from "./temp/SelectSuit";
+import { Button } from "@/components/ui/Button";
 
 import { BlackJackGame } from "@/build/blackjack/BlackJackGame";
+import { Hit } from "@/build/blackjack/Hit";
+
+import { useEffect, useState } from 'react';
 
 interface BlackJackTableProps {
 }
 
 export function BlackJackTable ({
 }) {
-  const hands = BlackJackGame()
-  const dealer = hands[1]
-  const player = hands[0]
-
-  var playerHand: [string, React.ReactNode, boolean][]
-  var dealerHand: [string, React.ReactNode, boolean][]
-  var CardNumber
-  var Suit
-  var Black
-
-  playerHand = []
-  dealerHand = []
+  const [dealerCards, setDealerCards] = useState([]);
+  const [shownDealerCards, setShownDealerCards] = useState([]);
+  const [dealerCount, setDealerCount] = useState(0);
+  const [playerCards, setPlayerCards] = useState([]);
+  const [playerCount, setPlayerCount] = useState(0);
+  const [startingHands, setStartingHands] = useState([]);
+  const [endOfGame, setEndOfGame] = useState(false);
   
-  for (let i of dealer) {
-    CardNumber = i.card;
-    Suit = SelectSuit(i.suit);
-    Black = true
-    dealerHand.push([CardNumber, Suit, Black]);
-  }
+  const [hit, setHit] = useState([]);
+  
+  // 
+  const [remainingDeck, setRemainingDeck] = useState([]);
+  
+  // start of gameState
+  useEffect(() => setPlayerCards(startingHands[0]), [startingHands])
+  useEffect(() => setDealerCards(startingHands[2]), [startingHands])
+  useEffect(() => setRemainingDeck(startingHands[3]), [startingHands])
+  useEffect(() => setShownDealerCards(startingHands[1]), [startingHands])
 
-  for (let i of player) {
-    CardNumber = i.card;
-    Suit = SelectSuit(i.suit);
-    Black = true
-    playerHand.push([CardNumber, Suit, Black]);
-  }
+  // showDealerCards at the endOfGame
+  useEffect(() => setDealerCards(shownDealerCards), [endOfGame])
+
+  // on playerAction "Hit"
+  useEffect(() => setPlayerCards(hit[0]), [hit])
+  useEffect(() => setRemainingDeck(hit[1]), [hit])
   
     return (
         <div className="
@@ -47,12 +48,14 @@ export function BlackJackTable ({
           px-4
         ">
           <div>
-            <Dealer cards={dealerHand}/>
+            <Dealer cards={dealerCards}/>
           </div>
           <hr></hr>
           <div>
-            <Player cards={playerHand}/>
+            <Player cards={playerCards}/>
           </div>
+          <Button label={"Start game"} onClick={() => setStartingHands(BlackJackGame())} />
+          <Button label={"Hit"} onClick={() => setHit(Hit(playerCards, remainingDeck))} />
         </div>
     )
 }
