@@ -12,7 +12,7 @@ export function Controls ({
       <div className="
       grid
       grid-rows-2 
-      h-screen
+      h-[80vh]
       justify-center
       ">
         <div className="grid row-span-1 grid-cols-2 h-[50vh] items-center">

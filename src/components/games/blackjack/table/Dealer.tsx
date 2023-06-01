@@ -1,14 +1,19 @@
 'use client';
 
 import { GameCard } from "../../GameCard";
-import { BsFillSuitSpadeFill } from "react-icons/bs"; 
 import { CardBack } from "../../CardBack";
 
 interface DealerProps {
+  cards?: [string, React.ReactNode, boolean][]
 }
 
 export function Dealer ({
-} ) {
+  cards,
+}: DealerProps) {
+  var max = 2;
+  if(cards != undefined){
+    max = 2-cards.length;
+  }
     return (
         <div className="
           flex
@@ -22,9 +27,18 @@ export function Dealer ({
           <h1 className="font-bold">Dealer</h1>
           <br></br>
           <div className="flex">
-            <GameCard top_left="7" bottom_right={<BsFillSuitSpadeFill size={23}/>} border={true} colour={true} /> 
-            <CardBack />
+            {cards?.map((card, index) => {
+              return (
+                <GameCard top_left={card[0]} bottom_right={card[1]} border={true} colour={card[2]} />
+              )
+            })}
+            {[...Array(max)].map((x, i) => {
+                return (<CardBack />)
+            }
+            )}
           </div>
         </div>
     )
 }
+
+
