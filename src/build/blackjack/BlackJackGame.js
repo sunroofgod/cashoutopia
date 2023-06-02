@@ -4,7 +4,7 @@ import { SelectSuit } from "@/components/games/blackjack/temp/SelectSuit"
 function CreateDeck() {
   const Deck = []
   const Suits = ["Heart", "Club", "Diamond", "Spade"]
-  const CardNumber = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"]
+  const CardNumber = [2, 3, 4, 5, 6, 7, 8, 9, 10, "J", "Q", "K", "A"]
 
   for (let suit of Suits) {
     for (let card of CardNumber) {
