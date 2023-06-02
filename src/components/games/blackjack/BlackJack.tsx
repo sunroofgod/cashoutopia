@@ -7,12 +7,9 @@ import { Controls } from "./Controls";
 export function BlackJack ({
 }) {
     return (
-      <div className="flex">
-      <div className="w-3/4">
+      <div className="w-[100vw]">
+      <div>
         <BlackJackTable />
-      </div>
-      <div className="w-1/4">
-        <Controls />
       </div>
       </div>
     )
