@@ -18,7 +18,7 @@ const UserMenu = () => {
                 cursor-pointer
             "
             >
-                Airbnb your home
+                Login
             </div>
         </div>
     </div>

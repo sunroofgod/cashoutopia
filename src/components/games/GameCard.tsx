@@ -1,7 +1,7 @@
 'use client';
 
 interface GameCardProps {
-    top_left?: string 
+    top_left?: string | number
     bottom_right?: React.ReactNode
     border?: boolean
     colour?: boolean

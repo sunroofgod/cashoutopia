@@ -76,12 +76,12 @@ export function BlackJackTable({
               250
             </div>
           </div>
-          <div className="grid row-span-1 grid-cols-2 h-[10vh] gap-5">
-            <div><Button label={"Start game"} onClick={() => setStartingHands(BlackJackGame())} /></div>
-            <div><Button label={"Hit"} onClick={() => setHit(Hit(playerCards, remainingDeck))} /></div>
-            <div><Button label={"Double"}></Button></div>
-            <div><Button label={"Stand"}></Button></div>
-            <div><Button label={"Split"}></Button></div>
+          <div className="grid row-span-1 grid-cols-4 h-[10vh] gap-5">
+            <div className="grid col-span-2"><Button label={"Hit"} onClick={() => setHit(Hit(playerCards, remainingDeck))} /></div>
+            <div className="grid col-span-2"><Button label={"Double"}></Button></div>
+            <div className="grid col-span-2"><Button label={"Stand"}></Button></div>
+            <div className="grid col-span-2"><Button label={"Split"}></Button></div>
+            <div className="grid col-start-2 col-span-2"><Button label={"Start game"} onClick={() => setStartingHands(BlackJackGame())} /></div>
           </div>
         </div>
       </div>
