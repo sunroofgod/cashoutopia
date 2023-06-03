@@ -7,8 +7,10 @@ import { TbCoins } from "react-icons/tb";
 
 import { BlackJackGame } from "@/build/blackjack/BlackJackGame";
 import { Hit } from "@/build/blackjack/Hit";
+import { Stand } from "@/build/blackjack/Stand";
+import { Double } from "@/build/blackjack/Double";
 
-import { useEffect, useState } from 'react';
+import { use, useEffect, useState } from 'react';
 
 interface BlackJackTableProps {
 }
@@ -20,6 +22,7 @@ export function BlackJackTable({
   const [dealerCount, setDealerCount] = useState(0);
   const [playerCards, setPlayerCards] = useState([]);
   const [playerCount, setPlayerCount] = useState(0);
+
   const [gameStartProps, setGameStartProps] = useState(
     {
       playerCards:[], 
@@ -27,32 +30,49 @@ export function BlackJackTable({
       shownDealerCards:[],
       remainingDeck:[], 
       betAmount:0, 
-      gameStart:false,
       playerCount:0,
-      dealerCount:0
+      dealerCount:0,
+      playerGameCondition:3,
+      gameStart:false,
     });
+  
+  
+  // Game States
+  // PlayerGameCondition:
+  //  3: Not Started
+  //  2: Ongoing
+  //  1: Win
+  //  0: Draw
+  //  -1: Lose
+  const [playerGameCondition, setPlayerGameCondition] = useState(3);
   const [gameStart, setGameStart] = useState(false);
   const [endOfGame, setEndOfGame] = useState(false);
   const [betAmount, setBetAmount] = useState(0);
 
   // playerAction States
-
   const [hit, setHit] = useState(
     {
       playerCards:[], 
       remainingDeck:[],
       playerCount: 0,
-      playerLose:false,
-      playerWin:false
+      playerGameCondition: 3
     });
-  const [stand, setStand] = useState(false);
-
-  // gameWinLose Stattes
-
-  const [playerLose, setPlayerLose] = useState(false);
-  const [playerWin, setPlayerWin] = useState(false);
-  const [dealerLose, setDealerLose] = useState(false);
-  const [playerDraw , setPlayerDraw] = useState(false);
+  const [stand, setStand] = useState(
+    {
+      playerGameCondition: 3,
+      shownDealerCards:[],
+      dealerCount: 0
+    }
+  );
+  const [double, setDouble] = useState(
+    {
+      playerCount: 0,
+      playerGameCondition: 3,
+      dealerCount: 0,
+      shownDealerCards:[],
+      playerCards:[]
+    }
+  );
 
   // 
   const [remainingDeck, setRemainingDeck] = useState([]);
@@ -63,22 +83,28 @@ export function BlackJackTable({
   useEffect(() => setRemainingDeck(gameStartProps.remainingDeck), [gameStartProps])
   useEffect(() => setShownDealerCards(gameStartProps.shownDealerCards), [gameStartProps])
   useEffect(() => setBetAmount(gameStartProps.betAmount), [gameStartProps])
-  useEffect(() => setGameStart(gameStartProps.gameStart), [gameStartProps])
+  useEffect(() => setPlayerGameCondition(gameStartProps.playerGameCondition), [gameStartProps])
   useEffect(() => setPlayerCount(gameStartProps.playerCount), [gameStartProps])
   useEffect(() => setDealerCount(gameStartProps.dealerCount), [gameStartProps])
+  useEffect(() => setGameStart(gameStartProps.gameStart), [gameStartProps])
 
   // on playerAction "Hit"
   useEffect(() => setPlayerCards(hit.playerCards), [hit])
   useEffect(() => setRemainingDeck(hit.remainingDeck), [hit])
   useEffect(() => setPlayerCount(hit.playerCount), [hit])
-  useEffect(() => setPlayerLose(hit.playerLose), [hit])
+  useEffect(() => setPlayerGameCondition(hit.playerGameCondition), [hit])
 
   // on playerAction "Stand"
-  useEffect(() => setDealerCards(gameStartProps.shownDealerCards), [stand])
+  useEffect(() => setDealerCards(stand.shownDealerCards), [stand])
+  useEffect(() => setPlayerGameCondition(stand.playerGameCondition), [stand])
+  useEffect(() => setDealerCount(stand.dealerCount), [stand])
 
-  // showDealerCards at the endOfGame
-  useEffect(() => setDealerCards(shownDealerCards), [endOfGame])
-
+  // on playerAction "Double"
+  useEffect(() => setDealerCards(double.shownDealerCards), [double])
+  useEffect(() => setPlayerGameCondition(double.playerGameCondition), [double])
+  useEffect(() => setDealerCount(double.dealerCount), [double])
+  useEffect(() => setPlayerCards(double.playerCards), [double])
+  useEffect(() => setPlayerCount(double.playerCount), [double])
 
   return (
     <div className="flex">
@@ -92,7 +118,7 @@ export function BlackJackTable({
       ">
         <div>
           <Dealer cards={dealerCards} />
-          {dealerCount}
+          {playerGameCondition<=1 && dealerCount}
         </div>
         <hr></hr>
         <div>
@@ -129,10 +155,40 @@ export function BlackJackTable({
           </div>
           <div className="grid row-span-1 grid-cols-4 h-[10vh] gap-5">
             {/* Set Hit Button */}
-            <div className="grid col-span-2"><Button label={"Hit"} onClick={() => setHit(Hit(playerCards, remainingDeck))} /></div>
-
-            <div className="grid col-span-2"><Button label={"Double"} disabled={true} /></div>
-            <div className="grid col-span-2"><Button label={"Stand"} onClick={() => setStand(true)}/></div>
+            <div className="grid col-span-2">
+              <Button label={"Hit"} onClick={() => setHit(Hit(playerCards, remainingDeck))} />
+            </div>
+            {/* Set Double Button 
+            - should be disabled={true} after hit 
+            */}
+            <div className="grid col-span-2">
+              <Button 
+                label={"Double"} 
+                onClick={() => setDouble(
+                  Double(
+                    playerCards,
+                    dealerCount,
+                    shownDealerCards,
+                    remainingDeck,
+                    playerGameCondition
+                  )
+                )} 
+              />
+            </div>
+            <div className="grid col-span-2">
+              <Button 
+                label={"Stand"} 
+                onClick={() => setStand(
+                  Stand(
+                    playerCount,
+                    dealerCount,
+                    shownDealerCards,
+                    remainingDeck,
+                    playerGameCondition
+                  )
+                )}
+              />
+            </div>
             <div className="grid col-span-2"><Button label={"Split"} disabled={true} /></div>
 
             {/* Set Bet Button */}

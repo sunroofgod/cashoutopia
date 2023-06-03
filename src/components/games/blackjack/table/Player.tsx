@@ -11,7 +11,7 @@ export function Player ({
 }: PlayerProps ) {
   var max = 5;
   if(cards != undefined){
-    max = 5-cards.length;
+    max = 5 - cards.length;
   }
     return (
         <div className="

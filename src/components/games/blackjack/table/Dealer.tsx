@@ -11,15 +11,15 @@ export function Dealer ({
   cards,
 }: DealerProps) {
   let maxCardBack = 2;
-  let maxEmptySlots = 5;
+  let maxEmptySlots = 3;
 
   if(cards != undefined){
     let cardsLength = cards.length
     maxCardBack = maxCardBack - cardsLength;
-    maxEmptySlots = maxEmptySlots - cardsLength - maxCardBack; 
-  }
-  if (maxCardBack < 0 ){
-    maxCardBack = 0
+    if (maxCardBack < 0){
+      maxCardBack = 0
+    }
+    maxEmptySlots = 5 - cardsLength - maxCardBack; 
   }
     return (
         <div className="
