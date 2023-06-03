@@ -1,15 +1,23 @@
-//creates unshuffled Deck
-import { SelectSuit } from "@/components/games/blackjack/temp/SelectSuit"
 import { CountPoints } from "./CountPoints"
+import { BsFillSuitSpadeFill } from "react-icons/bs"; 
+import { BsFillSuitClubFill } from "react-icons/bs"; 
+import { BsFillSuitHeartFill } from "react-icons/bs"; 
+import { BsFillSuitDiamondFill } from "react-icons/bs"; 
 
+//creates unshuffled Deck
 function CreateDeck() {
   const Deck = []
-  const Suits = ["Heart", "Club", "Diamond", "Spade"]
+  const Suits = [
+    [<BsFillSuitHeartFill size={23} color="red"/>, false], 
+    [<BsFillSuitClubFill size={23}/>, true],
+    [<BsFillSuitDiamondFill size={23} color="red"/>, false], 
+    [<BsFillSuitSpadeFill size={23}/>, true]
+  ]
   const CardNumber = [2, 3, 4, 5, 6, 7, 8, 9, 10, "J", "Q", "K", "A"]
   
   for (let suit of Suits) {
     for (let card of CardNumber) {
-      Deck.push({ suit, card })
+      Deck.push([card, suit[0], suit[1]])
     }
   }
   return Deck;
@@ -32,12 +40,9 @@ function DrawCard(ShuffledDeck) {
 }
 
 export function BlackJackGame(betAmount) {
-  let remainingDeck = [];
-  var gameState = 0;
+  let remainingDeck = ShuffleDeck(CreateDeck());
   let dealerCards = [];
   let playerCards = [];
-  let dealer = [];
-  let player = [];
   let shownDealerCards = [];
   let gameStart = true;
 
@@ -45,43 +50,21 @@ export function BlackJackGame(betAmount) {
   let playerCount = 0;
 
   while (true) {
-    if (gameState === 0) {
-      remainingDeck = ShuffleDeck(CreateDeck());
-      dealer = [];
-      player = [];
-      gameState = 1;
-    }
-    // else should allow player to do actions & receive inputs
-    else {
       for (let i = 0; i <= 1; i++){
         let drawnCard = DrawCard(remainingDeck);
-        dealer.push(drawnCard);
+        shownDealerCards.push(drawnCard);
         drawnCard = DrawCard(remainingDeck);
-        player.push(drawnCard); 
+        playerCards.push(drawnCard); 
       }
 
-      // configure format of cards to be read into GameCard.tsx
-      for (let i of player) {
-        let CardNumber = i.card;
-        let Suit = SelectSuit(i.suit);
-        let Black = true
-        playerCards.push([CardNumber, Suit, Black]);
-      }
-      for (let i of dealer) {
-        let CardNumber = i.card;
-        let Suit = SelectSuit(i.suit);
-        let Black = true
-        shownDealerCards.push([CardNumber, Suit, Black]);
-      }
       dealerCards = [shownDealerCards[0]]
 
       playerCount = CountPoints(playerCards)
-      dealerCount = CountPoints(dealerCards)
+      dealerCount = CountPoints(shownDealerCards)
 
       return(
         {playerCards, dealerCards, shownDealerCards, remainingDeck, betAmount, gameStart, playerCount, dealerCount}
       )
-    }
   }
 }
 

@@ -65,7 +65,7 @@ export function BlackJackTable({
   useEffect(() => setBetAmount(gameStartProps.betAmount), [gameStartProps])
   useEffect(() => setGameStart(gameStartProps.gameStart), [gameStartProps])
   useEffect(() => setPlayerCount(gameStartProps.playerCount), [gameStartProps])
-  useEffect(() => setPlayerCount(gameStartProps.dealerCount), [gameStartProps])
+  useEffect(() => setDealerCount(gameStartProps.dealerCount), [gameStartProps])
 
   // on playerAction "Hit"
   useEffect(() => setPlayerCards(hit.playerCards), [hit])
@@ -92,12 +92,12 @@ export function BlackJackTable({
       ">
         <div>
           <Dealer cards={dealerCards} />
+          {dealerCount}
         </div>
         <hr></hr>
         <div>
           <Player cards={playerCards} />
           {playerCount}
-          
         </div>
       </div>
       <div className="w-1/4">
@@ -130,7 +130,6 @@ export function BlackJackTable({
           <div className="grid row-span-1 grid-cols-4 h-[10vh] gap-5">
             {/* Set Hit Button */}
             <div className="grid col-span-2"><Button label={"Hit"} onClick={() => setHit(Hit(playerCards, remainingDeck))} /></div>
-             
 
             <div className="grid col-span-2"><Button label={"Double"} disabled={true} /></div>
             <div className="grid col-span-2"><Button label={"Stand"} onClick={() => setStand(true)}/></div>

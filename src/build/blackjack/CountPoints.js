@@ -1,5 +1,5 @@
 export function CountPoints(Hand) {
-    // Hand = [CardNumber:number|string, Suit:string, Black:boolean][]
+    // Hand = [CardNumber:number|string, Suit:<IconType />, Black:boolean][]
 
     let totalPoints = 0
     let currPoints = 0
@@ -7,6 +7,7 @@ export function CountPoints(Hand) {
     let numberOfAces = 0
 
     for (let Card of Hand) {
+        
         currPoints = Card[0]
 
         if (currPoints == "J" | currPoints == "Q" | currPoints == "K") {

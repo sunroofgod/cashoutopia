@@ -1,0 +1,16 @@
+
+
+on "Stand"/"Bust"/"Double" -->:
+  - View first 2 Dealer cards
+  - if "Bust":
+    Display Lose Screen
+
+  - else:
+    - if Dealer < 16:
+      for Loop (Dealer Draw Card until >= 16)
+        if Dealer > 21:
+          Display Win Screen
+        else:
+          check if Dealer > Player | Dealer > Player | Dealer == Player
+    - if Dealer > 16:
+        then check if Dealer > Player | Dealer > Player | Dealer == Player 
