@@ -10,9 +10,16 @@ interface DealerProps {
 export function Dealer ({
   cards,
 }: DealerProps) {
-  var max = 2;
+  let maxCardBack = 2;
+  let maxEmptySlots = 5;
+
   if(cards != undefined){
-    max = 2-cards.length;
+    let cardsLength = cards.length
+    maxCardBack = maxCardBack - cardsLength;
+    maxEmptySlots = maxEmptySlots - cardsLength - maxCardBack; 
+  }
+  if (maxCardBack < 0 ){
+    maxCardBack = 0
   }
     return (
         <div className="
@@ -32,10 +39,13 @@ export function Dealer ({
                 <GameCard top_left={card[0]} bottom_right={card[1]} border={true} colour={card[2]} />
               )
             })}
-            {[...Array(max)].map((x, i) => {
+            {[...Array(maxCardBack)].map((x, i) => {
                 return (<CardBack />)
             }
             )}
+            {[...Array(maxEmptySlots)].map((x, i) => {
+                return (<GameCard border={false} />)
+            })}
           </div>
         </div>
     )
