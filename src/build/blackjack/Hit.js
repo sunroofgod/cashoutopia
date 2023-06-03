@@ -1,4 +1,3 @@
-import { SelectSuit } from "@/components/games/blackjack/temp/SelectSuit";
 import { CountPoints } from "./CountPoints";
 
 function DrawCard(ShuffledDeck) {
@@ -7,23 +6,16 @@ function DrawCard(ShuffledDeck) {
 
 export function Hit(playerCards, remainingDeck) {
   let newCard = DrawCard(remainingDeck)
-  let properNewCard = []
-
   let playerCount = 0
-  let CardNumber = newCard.card;
-  let Suit = SelectSuit(newCard.suit);
-  let Black = true
   let playerLose = false
   let playerWin = false
 
-  properNewCard = [CardNumber, Suit, Black]
-
-  playerCards.push(properNewCard)
+  playerCards.push(newCard)
 
   playerCount = CountPoints(playerCards)
 
   if (playerCount > 21) {
-    playerLose = true;
+    playerLose = true
   }
   if (playerCards.length == 5 && playerCount <= 21){
     playerWin = true
