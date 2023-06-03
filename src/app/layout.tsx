@@ -26,7 +26,6 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-
     <html className="dark" lang="en" >
       <body className={font.className}>
       <ThemeProvider attribute="class" defaultTheme="system" enableSystem>

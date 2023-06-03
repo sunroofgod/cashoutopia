@@ -7,19 +7,19 @@ function DrawCard(ShuffledDeck) {
 export function Hit(playerCards, remainingDeck) {
   let newCard = DrawCard(remainingDeck)
   let playerCount = 0
-  let playerLose = false
-  let playerWin = false
+  let playerGameCondition = 0
 
   playerCards.push(newCard)
 
   playerCount = CountPoints(playerCards)
 
   if (playerCount > 21) {
-    playerLose = true
+    playerGameCondition = -1
   }
   if (playerCards.length == 5 && playerCount <= 21){
-    playerWin = true
+    playerGameCondition = 1
+    // possible implementation of return Win Screen here
   }
 
-  return {playerCards, remainingDeck, playerCount, playerLose, playerWin}
+  return {playerCards, remainingDeck, playerCount, playerGameCondition}
 }

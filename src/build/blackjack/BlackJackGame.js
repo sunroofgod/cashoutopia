@@ -1,8 +1,8 @@
 import { CountPoints } from "./CountPoints"
-import { BsFillSuitSpadeFill } from "react-icons/bs"; 
-import { BsFillSuitClubFill } from "react-icons/bs"; 
-import { BsFillSuitHeartFill } from "react-icons/bs"; 
-import { BsFillSuitDiamondFill } from "react-icons/bs"; 
+import { BsFillSuitSpadeFill } from "react-icons/bs"
+import { BsFillSuitClubFill } from "react-icons/bs" 
+import { BsFillSuitHeartFill } from "react-icons/bs"
+import { BsFillSuitDiamondFill } from "react-icons/bs"
 
 //creates unshuffled Deck
 function CreateDeck() {
@@ -26,11 +26,11 @@ function CreateDeck() {
 function ShuffleDeck(Deck) {
   const copy = Deck;
   for (let Index in Deck) {
-    let swapIndex = Math.floor(Math.random() * copy.length);
+    let swapIndex = Math.floor(Math.random() * copy.length)
 
-    let tempCard = copy[swapIndex];
-    copy[swapIndex] = copy[Index];
-    copy[Index] = tempCard;
+    let tempCard = copy[swapIndex]
+    copy[swapIndex] = copy[Index]
+    copy[Index] = tempCard
   }
   return copy;
 }
@@ -44,7 +44,8 @@ export function BlackJackGame(betAmount) {
   let dealerCards = [];
   let playerCards = [];
   let shownDealerCards = [];
-  let gameStart = true;
+  let playerGameCondition = 2;
+  let gameStart = true
 
   let dealerCount = 0;
   let playerCount = 0;
@@ -62,8 +63,17 @@ export function BlackJackGame(betAmount) {
       playerCount = CountPoints(playerCards)
       dealerCount = CountPoints(shownDealerCards)
 
-      return(
-        {playerCards, dealerCards, shownDealerCards, remainingDeck, betAmount, gameStart, playerCount, dealerCount}
+      return({
+        playerCards, 
+        dealerCards, 
+        shownDealerCards, 
+        remainingDeck, 
+        betAmount, 
+        playerCount, 
+        dealerCount, 
+        playerGameCondition,
+        gameStart
+      }
       )
   }
 }

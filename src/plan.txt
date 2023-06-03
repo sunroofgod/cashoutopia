@@ -1,3 +1,9 @@
+playerGameCondition:
+  3: Not Started
+  2: Ongoing
+  1: Win
+  0: Draw
+  -1: Lose
 
 
 on "Stand"/"Bust"/"Double" -->:
