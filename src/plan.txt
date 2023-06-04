@@ -1,22 +1,65 @@
-playerGameCondition:
-  3: Not Started
-  2: Ongoing
-  1: Win
-  0: Draw
-  -1: Lose
+playerCards:
+[card:number|string, suit: <IconType/>, black:boolean][]
 
+if multiplayer-->BlackJackTable needs to have slotIDs
 
-on "Stand"/"Bust"/"Double" -->:
-  - View first 2 Dealer cards
-  - if "Bust":
-    Display Lose Screen
+playerCards --> associated with a playerID & handID
 
-  - else:
-    - if Dealer < 16:
-      for Loop (Dealer Draw Card until >= 16)
-        if Dealer > 21:
-          Display Win Screen
-        else:
-          check if Dealer > Player | Dealer > Player | Dealer == Player
-    - if Dealer > 16:
-        then check if Dealer > Player | Dealer > Player | Dealer == Player 
+playerCards =
+{
+  hand: [card:number|string, suit: <IconType/>, black:boolean][],
+  handID: number,
+  betAmount: number,
+  outcome: number (-1 = Lose, 0 = Draw, 1 = Win, 2 = Ongoing)
+}
+Player = 
+{
+  cards: playerCards[],
+  playerID: string,
+}
+
+on SetBet --> 
+  - Create playerCards Object
+  - Create Player Object if does not exist?
+    - then insert playerCards into Player
+  - Based on the Actions --> Adjust hand in playerCards
+  END OF GAME (what is end of game? when playerGameCondition for the hand <= 1?) 
+  - deduct/add money through loop on
+  - set Player playercards = [] (only if SetBet is pressed again) 
+
+on Split:
+  --> if first hand busts --> shownDealerCards doesn't occur
+  --> 
+
+PLAYER = {
+  name: number,
+  playerID: string,
+  email: string,
+  hashedPassword: string,
+}
+
+Player.tsx --> has to loop through all the player's playerCards instances 
+  --> internal loop will be what it is rn
+
+After this have to handle Hit, Stand, Double & Win/Lose/Draw condition is now tied to (handID, playerID)
+
+Register account ->
+
+playerCards =
+{
+  hand: [card:number|string, suit: <IconType/>, black:boolean][],
+  handID: number,
+  betAmount: number,
+  outcome: number (-1 = Lose, 0 = Draw, 1 = Win, 2 = Ongoing)
+}
+
+e.g.
+hand: [[3, <IconType/>, true], [[3, <IconType/>, true]]]
+
+on Split: --> only occur if playerCards.hands[0][0] === playerCards.hands[1][0]:
+  --> have to instantly deduct money from the guy
+  createNewHandArray --> 
+  let newHand = []
+  newHand.push(hand.pop())
+  let newPlayerCards = {hand:newHand, handID:GenerateNewHandID(), betAmount:betAmount, outcome: 2}
+  Player.cards.push(newPlayerCards)
