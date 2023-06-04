@@ -30,17 +30,17 @@ export function BlackJackTable({
 
   const [gameStartProps, setGameStartProps] = useState(
     {
-      playerCards:[], 
-      dealerCards:[], 
-      shownDealerCards:[],
-      remainingDeck:[], 
-      betAmount:0, 
-      playerCount:0,
-      dealerCount:0,
-      playerGameCondition:3,
-      gameStart:false,
+      playerCards: [],
+      dealerCards: [],
+      shownDealerCards: [],
+      remainingDeck: [],
+      betAmount: 0,
+      playerCount: 0,
+      dealerCount: 0,
+      playerGameCondition: 3,
+      gameStart: false,
     });
-  
+
   // Game States
   // PlayerGameCondition:
   //  3: Not Started
@@ -56,69 +56,74 @@ export function BlackJackTable({
   // playerAction States
   const [hit, setHit] = useState(
     {
-      playerCards:[], 
-      remainingDeck:[],
-      playerCount:0,
-      playerGameCondition:3,
-      endOfGame:false,
-      shownDealerCards:[]
+      playerCards: [],
+      remainingDeck: [],
+      playerCount: 0,
+      playerGameCondition: 3,
+      endOfGame: false,
+      shownDealerCards: []
     });
   const [stand, setStand] = useState(
     {
-      playerGameCondition:3,
-      shownDealerCards:[],
-      dealerCount:0,
-      endOfGame:false
+      playerGameCondition: 3,
+      shownDealerCards: [],
+      dealerCount: 0,
+      endOfGame: false
     }
   );
   const [double, setDouble] = useState(
     {
-      playerCount:0,
-      playerGameCondition:3,
-      dealerCount:0,
-      shownDealerCards:[],
-      playerCards:[],
-      endOfGame:false
+      playerCount: 0,
+      playerGameCondition: 3,
+      dealerCount: 0,
+      shownDealerCards: [],
+      playerCards: [],
+      endOfGame: false
     }
   );
 
-    useEffect(() => {
-      if (playerGameCondition == 1) {
-        toast("You win!", {
-          position: "top-center",
-          autoClose: 2000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-          });
-        
-      } else if (playerGameCondition == -1) {
-        toast("You lose!", {
-          position: "top-center",
-          autoClose: 2000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-          });
-      } else if (playerGameCondition == 0) {
-        toast("You draw!", {
-          position: "top-center",
-          autoClose: 2000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-          });
-      } 
-    })
+  useEffect(() => {
+    if (playerGameCondition == 1) {
+      toast("You win!", {
+        type: "success",
+        position: "top-center",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
+      setPlayerGameCondition(3);
+
+    } else if (playerGameCondition == -1) {
+      toast("You lose!", {
+        type: "error",
+        position: "top-center",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
+      setPlayerGameCondition(3);
+    } else if (playerGameCondition == 0) {
+      toast("You draw!", {
+        position: "top-center",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
+      setPlayerGameCondition(3);
+    }
+  })
 
   // start of gameState
   useEffect(() => setPlayerCards(gameStartProps.playerCards), [gameStartProps])
@@ -130,6 +135,7 @@ export function BlackJackTable({
   useEffect(() => setPlayerCount(gameStartProps.playerCount), [gameStartProps])
   useEffect(() => setDealerCount(gameStartProps.dealerCount), [gameStartProps])
   useEffect(() => setGameStart(gameStartProps.gameStart), [gameStartProps])
+  useEffect(() => setPlayerGameCondition(2), [gameStartProps])
 
   // on playerAction "Hit"
   useEffect(() => setPlayerCards(hit.playerCards), [hit])
@@ -172,9 +178,9 @@ export function BlackJackTable({
           {gameStart && (<p>gameStart=true</p>)} */}
         </div>
         <div>
-          <Dealer cards={dealerCards} cardPoints={dealerCount} reveal={endOfGame}/>
+          <Dealer cards={dealerCards} cardPoints={dealerCount} reveal={endOfGame} />
         </div>
-        <hr></hr>
+        <hr className="border-2 border-slate-300/30 w-11/12 mx-auto border-dashed"></hr>
         <div>
           <Player cards={playerCards} cardPoints={playerCount} />
         </div>
@@ -192,12 +198,12 @@ export function BlackJackTable({
               <form>
                 Bet:
                 {(endOfGame || !gameStart) && (<input
-                type= "number"
-                className="w-10" 
-                id="bet" 
-                placeholder = "10"
-                value = {betAmount}
-                onChange={(e) => setBetAmount(e.target.value)}/>)}
+                  type="number"
+                  className="w-10"
+                  id="bet"
+                  placeholder="10"
+                  value={betAmount}
+                  onChange={(e) => setBetAmount(e.target.value)} />)}
                 {!endOfGame && betAmount}
               </form>
             </div>
@@ -209,13 +215,13 @@ export function BlackJackTable({
           <div className="grid row-span-1 grid-cols-4 h-[10vh] gap-5">
             {/* Set Hit Button */}
             <div className="grid col-span-2">
-              <Button label={"Hit"} onClick={() => setHit(Hit(playerCards, remainingDeck, shownDealerCards, dealerCards))} />
+              <Button label={"HIT"} onClick={() => setHit(Hit(playerCards, remainingDeck, shownDealerCards, dealerCards))} />
             </div>
             {/* Set Double Button 
             - should be disabled={true} after hit 
             */}
             <div className="grid col-span-2">
-              <Button label={"Double"} 
+              <Button label={"DOUBLE"}
                 onClick={() => setDouble(
                   Double(
                     playerCards,
@@ -224,13 +230,13 @@ export function BlackJackTable({
                     remainingDeck,
                     playerGameCondition
                   )
-                )} 
+                )}
               />
             </div>
 
 
             <div className="grid col-span-2">
-              <Button label={"Stand"} 
+              <Button label={"STAND"}
                 onClick={() => setStand(
                   Stand(
                     playerCount,
@@ -243,13 +249,13 @@ export function BlackJackTable({
               />
             </div>
 
-            
+
             <div className="grid col-span-2">
-              <Button label={"Split"} disabled={true} />
+              <Button label={"SPLIT"} disabled={true} />
             </div>
             {/* Set Bet Button */}
-            <div className="grid col-start-2 col-span-2"><Button label={"Set Bet"} onClick={() => setGameStartProps(BlackJackGame(betAmount))} /></div>
-            
+            <div className="grid col-start-2 col-span-2"><Button label={"SET BET"} onClick={() => setGameStartProps(BlackJackGame(betAmount))} /></div>
+
           </div>
         </div>
 

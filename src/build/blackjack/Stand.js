@@ -36,7 +36,7 @@ export function Stand(
     if (dealerCount > 21) {
       playerGameCondition = 1
       return ({playerGameCondition, shownDealerCards, dealerCount, endOfGame})
-    } else if (playerCount < dealerCount) {
+    } else if (playerCount > dealerCount) {
       playerGameCondition = 1
       return ({playerGameCondition, shownDealerCards, dealerCount, endOfGame})
     } else if (playerCount < dealerCount) {
