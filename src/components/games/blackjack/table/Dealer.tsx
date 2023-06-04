@@ -5,10 +5,14 @@ import { CardBack } from "../../CardBack";
 
 interface DealerProps {
   cards?: [string, React.ReactNode, boolean][]
+  cardPoints?: number
+  reveal: boolean
 }
 
 export function Dealer ({
   cards,
+  cardPoints,
+  reveal
 }: DealerProps) {
   let maxCardBack = 2;
   let maxEmptySlots = 3;
@@ -31,7 +35,7 @@ export function Dealer ({
           pb-7
           pt-2
         ">
-          <h1 className="font-bold">Dealer</h1>
+          <h1 className="font-bold">Dealer ({reveal && cardPoints})</h1>
           <br></br>
           <div className="flex">
             {cards?.map((card, index) => {

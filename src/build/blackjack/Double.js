@@ -12,7 +12,12 @@ export function Double(
   remainingDeck,
   playerGameCondition
 ) {
+  // if playerCards.length >= 3:
+  //    then should just return everything as is (means entire baord doesnt change), 
+  //    but also return double:error = true --> toast popup
+  // alternative, the button can just be disabled
   let playerCount = 0
+  let endOfGame = true
   let hit = Hit(playerCards, remainingDeck)
   let stand = Stand(
     hit.playerCount,
@@ -34,7 +39,8 @@ export function Double(
       playerGameCondition,
       dealerCount,
       shownDealerCards,
-      playerCards
+      playerCards,
+      endOfGame
     }
   )
 

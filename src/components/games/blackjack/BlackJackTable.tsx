@@ -22,6 +22,7 @@ export function BlackJackTable({
   const [dealerCount, setDealerCount] = useState(0);
   const [playerCards, setPlayerCards] = useState([]);
   const [playerCount, setPlayerCount] = useState(0);
+  const [remainingDeck, setRemainingDeck] = useState([]);
 
   const [gameStartProps, setGameStartProps] = useState(
     {
@@ -35,7 +36,6 @@ export function BlackJackTable({
       playerGameCondition:3,
       gameStart:false,
     });
-  
   
   // Game States
   // PlayerGameCondition:
@@ -54,28 +54,29 @@ export function BlackJackTable({
     {
       playerCards:[], 
       remainingDeck:[],
-      playerCount: 0,
-      playerGameCondition: 3
+      playerCount:0,
+      playerGameCondition:3,
+      endOfGame:false,
+      shownDealerCards:[]
     });
   const [stand, setStand] = useState(
     {
-      playerGameCondition: 3,
+      playerGameCondition:3,
       shownDealerCards:[],
-      dealerCount: 0
+      dealerCount:0,
+      endOfGame:false
     }
   );
   const [double, setDouble] = useState(
     {
-      playerCount: 0,
-      playerGameCondition: 3,
-      dealerCount: 0,
+      playerCount:0,
+      playerGameCondition:3,
+      dealerCount:0,
       shownDealerCards:[],
-      playerCards:[]
+      playerCards:[],
+      endOfGame:false
     }
   );
-
-  // 
-  const [remainingDeck, setRemainingDeck] = useState([]);
 
   // start of gameState
   useEffect(() => setPlayerCards(gameStartProps.playerCards), [gameStartProps])
@@ -93,11 +94,14 @@ export function BlackJackTable({
   useEffect(() => setRemainingDeck(hit.remainingDeck), [hit])
   useEffect(() => setPlayerCount(hit.playerCount), [hit])
   useEffect(() => setPlayerGameCondition(hit.playerGameCondition), [hit])
+  useEffect(() => setEndOfGame(hit.endOfGame), [hit])
+  useEffect(() => setDealerCards(hit.shownDealerCards), [hit])
 
   // on playerAction "Stand"
   useEffect(() => setDealerCards(stand.shownDealerCards), [stand])
   useEffect(() => setPlayerGameCondition(stand.playerGameCondition), [stand])
   useEffect(() => setDealerCount(stand.dealerCount), [stand])
+  useEffect(() => setEndOfGame(stand.endOfGame), [stand])
 
   // on playerAction "Double"
   useEffect(() => setDealerCards(double.shownDealerCards), [double])
@@ -105,6 +109,10 @@ export function BlackJackTable({
   useEffect(() => setDealerCount(double.dealerCount), [double])
   useEffect(() => setPlayerCards(double.playerCards), [double])
   useEffect(() => setPlayerCount(double.playerCount), [double])
+  useEffect(() => setEndOfGame(double.endOfGame), [double])
+
+  //
+  useEffect(() => setEndOfGame(false), [gameStartProps])
 
   return (
     <div className="flex">
@@ -117,13 +125,15 @@ export function BlackJackTable({
         px-4
       ">
         <div>
-          <Dealer cards={dealerCards} />
-          {playerGameCondition<=1 && dealerCount}
+          {/* {endOfGame && (<p>endOfGame=true</p>)}
+          {gameStart && (<p>gameStart=true</p>)} */}
+        </div>
+        <div>
+          <Dealer cards={dealerCards} cardPoints={dealerCount} reveal={endOfGame}/>
         </div>
         <hr></hr>
         <div>
-          <Player cards={playerCards} />
-          {playerCount}
+          <Player cards={playerCards} cardPoints={playerCount} />
         </div>
       </div>
       <div className="w-1/4">
@@ -138,14 +148,14 @@ export function BlackJackTable({
               <TbPokerChip size={100} />
               <form>
                 Bet:
-                {!gameStart && (<input
-                type= "text"
+                {(endOfGame || !gameStart) && (<input
+                type= "number"
                 className="w-10" 
                 id="bet" 
                 placeholder = "10"
                 value = {betAmount}
                 onChange={(e) => setBetAmount(e.target.value)}/>)}
-                {gameStart && betAmount}
+                {!endOfGame && betAmount}
               </form>
             </div>
             <div className="grid grid-rows-2 text-center justify-center">
@@ -156,14 +166,13 @@ export function BlackJackTable({
           <div className="grid row-span-1 grid-cols-4 h-[10vh] gap-5">
             {/* Set Hit Button */}
             <div className="grid col-span-2">
-              <Button label={"Hit"} onClick={() => setHit(Hit(playerCards, remainingDeck))} />
+              <Button label={"Hit"} onClick={() => setHit(Hit(playerCards, remainingDeck, shownDealerCards, dealerCards))} />
             </div>
             {/* Set Double Button 
             - should be disabled={true} after hit 
             */}
             <div className="grid col-span-2">
-              <Button 
-                label={"Double"} 
+              <Button label={"Double"} 
                 onClick={() => setDouble(
                   Double(
                     playerCards,
@@ -176,8 +185,7 @@ export function BlackJackTable({
               />
             </div>
             <div className="grid col-span-2">
-              <Button 
-                label={"Stand"} 
+              <Button label={"Stand"} 
                 onClick={() => setStand(
                   Stand(
                     playerCount,
@@ -189,8 +197,9 @@ export function BlackJackTable({
                 )}
               />
             </div>
-            <div className="grid col-span-2"><Button label={"Split"} disabled={true} /></div>
-
+            <div className="grid col-span-2">
+              <Button label={"Split"} disabled={true} />
+            </div>
             {/* Set Bet Button */}
             <div className="grid col-start-2 col-span-2"><Button label={"Set Bet"} onClick={() => setGameStartProps(BlackJackGame(betAmount))} /></div>
           </div>

@@ -5,6 +5,7 @@ import Navbar from '@/components/navbar/Navbar'
 
 import { DarkmodeToggle } from '@/components/ui/ModeToggle';
 import { ThemeProvider } from '@/components/themeprovider';
+import { ToastContainer } from 'react-toastify';
 
 const font = Raleway({
   subsets: ['latin'],
@@ -31,6 +32,7 @@ export default function RootLayout({
       <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <Navbar />
           <DarkmodeToggle />
+          <ToastContainer />
           {children}
         </ThemeProvider>
       </body>
