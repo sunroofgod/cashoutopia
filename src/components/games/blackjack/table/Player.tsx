@@ -3,11 +3,13 @@
 import { GameCard } from "../../GameCard";
 
 interface PlayerProps {
-  cards?: [string, React.ReactNode, boolean][]
+  cards?: [string, React.ReactNode, boolean][],
+  cardPoints?: number
 }
 
 export function Player ({
   cards,
+  cardPoints
 }: PlayerProps ) {
   var max = 5;
   if(cards != undefined){
@@ -18,11 +20,11 @@ export function Player ({
           flex
           flex-col
           items-center
-          justify-center
+          justify-start
           min-h-[40vh]
-          py-5
+          py-3
         ">
-          <h1 className="font-bold">Player</h1>
+          <h1 className="font-bold">Player ({cardPoints})</h1>
           <br></br>
           <div className="flex">
             {cards?.map((card, index) => {

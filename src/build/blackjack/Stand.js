@@ -11,20 +11,21 @@ export function Stand(
   remainingDeck,
   playerGameCondition
 ) {
+  let endOfGame = true
   if (playerGameCondition === 1) {
     // possible implementation of return Win Screen here
-    return ({playerGameCondition, shownDealerCards, dealerCount})
+    return ({playerGameCondition, shownDealerCards, dealerCount, endOfGame})
   }
   else if (dealerCount > 16) {
     if (playerCount > dealerCount) {
       playerGameCondition = 1
-      return ({playerGameCondition, shownDealerCards, dealerCount})
+      return ({playerGameCondition, shownDealerCards, dealerCount, endOfGame})
     } else if (playerCount < dealerCount) {
       playerGameCondition = -1
-      return ({playerGameCondition, shownDealerCards, dealerCount})
+      return ({playerGameCondition, shownDealerCards, dealerCount, endOfGame})
     } else {
       playerGameCondition = 0
-      return ({playerGameCondition, shownDealerCards, dealerCount})
+      return ({playerGameCondition, shownDealerCards, dealerCount, endOfGame})
     }
   } else {
     while (dealerCount <= 16) {
@@ -34,16 +35,16 @@ export function Stand(
     }
     if (dealerCount > 21) {
       playerGameCondition = 1
-      return ({playerGameCondition, shownDealerCards, dealerCount})
+      return ({playerGameCondition, shownDealerCards, dealerCount, endOfGame})
     } else if (playerCount < dealerCount) {
       playerGameCondition = 1
-      return ({playerGameCondition, shownDealerCards, dealerCount})
+      return ({playerGameCondition, shownDealerCards, dealerCount, endOfGame})
     } else if (playerCount < dealerCount) {
       playerGameCondition = -1
-      return ({playerGameCondition, shownDealerCards, dealerCount})
+      return ({playerGameCondition, shownDealerCards, dealerCount, endOfGame})
     } else {
       playerGameCondition = 0
-      return ({playerGameCondition, shownDealerCards, dealerCount})
+      return ({playerGameCondition, shownDealerCards, dealerCount, endOfGame})
     }
   }
 }
