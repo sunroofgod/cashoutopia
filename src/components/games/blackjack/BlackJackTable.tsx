@@ -12,6 +12,10 @@ import { Double } from "@/build/blackjack/Double";
 
 import { use, useEffect, useState } from 'react';
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import '@/app/globals.css'
+
 interface BlackJackTableProps {
 }
 
@@ -78,6 +82,44 @@ export function BlackJackTable({
     }
   );
 
+    useEffect(() => {
+      if (playerGameCondition == 1) {
+        toast("You win!", {
+          position: "top-center",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          });
+        
+      } else if (playerGameCondition == -1) {
+        toast("You lose!", {
+          position: "top-center",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          });
+      } else if (playerGameCondition == 0) {
+        toast("You draw!", {
+          position: "top-center",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          });
+      } 
+    })
+
   // start of gameState
   useEffect(() => setPlayerCards(gameStartProps.playerCards), [gameStartProps])
   useEffect(() => setDealerCards(gameStartProps.dealerCards), [gameStartProps])
@@ -113,6 +155,7 @@ export function BlackJackTable({
 
   //
   useEffect(() => setEndOfGame(false), [gameStartProps])
+
 
   return (
     <div className="flex">
@@ -184,6 +227,8 @@ export function BlackJackTable({
                 )} 
               />
             </div>
+
+
             <div className="grid col-span-2">
               <Button label={"Stand"} 
                 onClick={() => setStand(
@@ -197,14 +242,19 @@ export function BlackJackTable({
                 )}
               />
             </div>
+
+            
             <div className="grid col-span-2">
               <Button label={"Split"} disabled={true} />
             </div>
             {/* Set Bet Button */}
             <div className="grid col-start-2 col-span-2"><Button label={"Set Bet"} onClick={() => setGameStartProps(BlackJackGame(betAmount))} /></div>
+            
           </div>
         </div>
+
       </div>
+
     </div>
   )
 }
