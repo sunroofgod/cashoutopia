@@ -24,23 +24,21 @@ export function Button ({
       disabled={disabled}
       onClick={onClick}
       className={`
-        disabled:opacity-70
+        disabled:opacity-40
         disabled:cursor-not-allowed
         rounded-lg
         hover:opacity-80
         transition
         w-36 
         h-12 
-        font-normal
-        align-top
-        ${outline ? '' : 'bg-slate-900'}
-        ${outline ? 'border-black' : 'border-slate-900'}
-        ${outline ? 'border-2': 'border-2'}
+        ${outline ? '' : 'bg-slate-600'}
+        ${outline ? 'border-black' : ''}
+        ${outline ? 'border-2': ''}
         ${outline ? 'text-slate-900' : 'text-white'}
-        ${small ? 'text-sm' : 'text-base'}
+        ${small ? 'text-sm' : 'text-md'}
         ${small ? 'py-1' : 'py-3'}
-        ${small ? 'font-light' : 'font-normal'}
-        ${small ? 'border-[1px]' : ''}
+        ${small ? 'font-light' : 'font-medium'}
+        ${small ? 'border-[1px]' : 'shadow-md'}
       `}
     >
       {Icon && (
