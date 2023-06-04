@@ -49,7 +49,6 @@ export function BlackJackTable({
   //  0: Draw
   //  -1: Lose
   const [playerGameCondition, setPlayerGameCondition] = useState(3);
-  const [gameStart, setGameStart] = useState(false);
   const [endOfGame, setEndOfGame] = useState(false);
   const [betAmount, setBetAmount] = useState(0);
 
@@ -82,6 +81,7 @@ export function BlackJackTable({
     }
   );
 
+  // Toast for Win/Lose/Draw 
   useEffect(() => {
     if (playerGameCondition == 1) {
       toast("You win!", {
@@ -96,7 +96,6 @@ export function BlackJackTable({
         theme: "colored",
       });
       setPlayerGameCondition(3);
-
     } else if (playerGameCondition == -1) {
       toast("You lose!", {
         type: "error",
@@ -134,8 +133,6 @@ export function BlackJackTable({
   useEffect(() => setPlayerGameCondition(gameStartProps.playerGameCondition), [gameStartProps])
   useEffect(() => setPlayerCount(gameStartProps.playerCount), [gameStartProps])
   useEffect(() => setDealerCount(gameStartProps.dealerCount), [gameStartProps])
-  useEffect(() => setGameStart(gameStartProps.gameStart), [gameStartProps])
-  useEffect(() => setPlayerGameCondition(2), [gameStartProps])
 
   // on playerAction "Hit"
   useEffect(() => setPlayerCards(hit.playerCards), [hit])
@@ -159,9 +156,8 @@ export function BlackJackTable({
   useEffect(() => setPlayerCount(double.playerCount), [double])
   useEffect(() => setEndOfGame(double.endOfGame), [double])
 
-  //
+  // end of gameState
   useEffect(() => setEndOfGame(false), [gameStartProps])
-
 
   return (
     <div className="flex">
@@ -173,10 +169,6 @@ export function BlackJackTable({
         min-h-[80vh]          
         px-4
       ">
-        <div>
-          {/* {endOfGame && (<p>endOfGame=true</p>)}
-          {gameStart && (<p>gameStart=true</p>)} */}
-        </div>
         <div>
           <Dealer cards={dealerCards} cardPoints={dealerCount} reveal={endOfGame} />
         </div>
@@ -197,14 +189,14 @@ export function BlackJackTable({
               <TbPokerChip size={100} />
               <form>
                 Bet:
-                {(endOfGame || !gameStart) && (<input
+                {(endOfGame || playerGameCondition==3) && (<input
                   type="number"
                   className="w-10"
                   id="bet"
                   placeholder="10"
                   value={betAmount}
                   onChange={(e) => setBetAmount(e.target.value)} />)}
-                {!endOfGame && betAmount}
+                {!endOfGame && playerGameCondition!=3 && betAmount}
               </form>
             </div>
             <div className="grid grid-rows-2 text-center justify-center">
@@ -215,7 +207,10 @@ export function BlackJackTable({
           <div className="grid row-span-1 grid-cols-4 h-[10vh] gap-5">
             {/* Set Hit Button */}
             <div className="grid col-span-2">
-              <Button label={"HIT"} onClick={() => setHit(Hit(playerCards, remainingDeck, shownDealerCards, dealerCards))} />
+              <Button label={"HIT"}
+                onClick={() => setHit(Hit(playerCards, remainingDeck, shownDealerCards, dealerCards))}
+                disabled={endOfGame}
+              />
             </div>
             {/* Set Double Button 
             - should be disabled={true} after hit 
@@ -231,9 +226,9 @@ export function BlackJackTable({
                     playerGameCondition
                   )
                 )}
+                disabled={playerCards.length >= 3 || endOfGame}
               />
             </div>
-
 
             <div className="grid col-span-2">
               <Button label={"STAND"}
@@ -246,21 +241,23 @@ export function BlackJackTable({
                     playerGameCondition
                   )
                 )}
+                disabled={endOfGame}
               />
             </div>
-
 
             <div className="grid col-span-2">
               <Button label={"SPLIT"} disabled={true} />
             </div>
             {/* Set Bet Button */}
-            <div className="grid col-start-2 col-span-2"><Button label={"SET BET"} onClick={() => setGameStartProps(BlackJackGame(betAmount))} /></div>
-
+            <div className="grid col-start-2 col-span-2">
+              <Button label={"SET BET"}
+                onClick={() => setGameStartProps(BlackJackGame(betAmount))}
+                disabled={!endOfGame && playerGameCondition != 3}
+              />
+            </div>
           </div>
         </div>
-
       </div>
-
     </div>
   )
 }

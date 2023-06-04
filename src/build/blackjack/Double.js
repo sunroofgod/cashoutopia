@@ -19,6 +19,20 @@ export function Double(
   let playerCount = 0
   let endOfGame = true
   let hit = Hit(playerCards, remainingDeck)
+  if (hit.playerGameCondition === -1) {
+    playerGameCondition = hit.playerGameCondition
+    playerCount = hit.playerCount
+    return(
+      {
+        playerCount,
+        playerGameCondition,
+        dealerCount,
+        shownDealerCards,
+        playerCards,
+        endOfGame
+      }
+    ) 
+  }
   let stand = Stand(
     hit.playerCount,
     dealerCount,
