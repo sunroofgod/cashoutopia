@@ -90,3 +90,9 @@
     @apply dark:bg-black dark:text-gray-100 bg-gray-50 text-gray-900
   }
 }
+
+.Toastify__toast-container--top-center {
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
