@@ -1,5 +1,6 @@
 import { CountPoints } from "./CountPoints";
 
+
 function DrawCard(ShuffledDeck) {
   return ShuffledDeck.pop();
 }

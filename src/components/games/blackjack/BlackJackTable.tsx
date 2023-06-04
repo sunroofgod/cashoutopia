@@ -12,6 +12,9 @@ import { Double } from "@/build/blackjack/Double";
 
 import { use, useEffect, useState } from 'react';
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 interface BlackJackTableProps {
 }
 
@@ -204,7 +207,9 @@ export function BlackJackTable({
             <div className="grid col-start-2 col-span-2"><Button label={"Set Bet"} onClick={() => setGameStartProps(BlackJackGame(betAmount))} /></div>
           </div>
         </div>
+
       </div>
+
     </div>
   )
 }
