@@ -1,6 +1,6 @@
 'use client';
-import { Dealer } from "./table/Dealer";
-import { Player } from "./table/Player";
+import { DealerHandDisplay } from "./table/DealerHandDisplay";
+import { PlayerHandDisplay } from "./table/PlayerHandDisplay";
 import { Button } from "@/components/ui/Button";
 import { TbPokerChip } from "react-icons/tb";
 import { TbCoins } from "react-icons/tb";
@@ -170,11 +170,11 @@ export function BlackJackTable({
         px-4
       ">
         <div>
-          <Dealer cards={dealerCards} cardPoints={dealerCount} reveal={endOfGame} />
+          <DealerHandDisplay cards={dealerCards} cardPoints={dealerCount} reveal={endOfGame} />
         </div>
         <hr className="border-2 border-slate-300/30 w-11/12 mx-auto border-dashed"></hr>
         <div>
-          <Player cards={playerCards} cardPoints={playerCount} />
+          <PlayerHandDisplay cards={playerCards} cardPoints={playerCount} />
         </div>
       </div>
       <div className="w-1/4">

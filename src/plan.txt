@@ -5,18 +5,21 @@ if multiplayer-->BlackJackTable needs to have slotIDs
 
 playerCards --> associated with a playerID & handID
 
-playerCards =
+playerHand =
 {
-  hand: [card:number|string, suit: <IconType/>, black:boolean][],
+  cards: [card:number|string, suit: <IconType/>, black:boolean][],
   handID: number,
   betAmount: number,
   outcome: number (-1 = Lose, 0 = Draw, 1 = Win, 2 = Ongoing)
 }
 Player = 
 {
-  cards: playerCards[],
+  hands: playerHand[],
   playerID: string,
 }
+
+?? How do I handle the generation of Player Objects?
+-[]
 
 on SetBet --> 
   - Create playerCards Object
