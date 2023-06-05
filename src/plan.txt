@@ -23,7 +23,7 @@ Player =
 
 on SetBet --> 
   - Create playerCards Object
-  - Create Player Object if does not exist?
+  - Create Player Object if does not exist? new Player(playerCards,playerID)
     - then insert playerCards into Player
   - Based on the Actions --> Adjust hand in playerCards
   END OF GAME (what is end of game? when playerGameCondition for the hand <= 1?) 
