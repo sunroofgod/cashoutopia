@@ -1,6 +1,6 @@
 'use client';
 
-class Player {
+export class Player {
   hands: playerHand[];
   playerID: string;
 
@@ -16,7 +16,7 @@ class Player {
   }
 }
 
-class playerHand {
+export class playerHand {
   cards: [string, React.ReactNode, boolean][];
   handID: number;
   betAmount: number;
