@@ -10,6 +10,9 @@ import { Hit } from "@/build/blackjack/Hit";
 import { Stand } from "@/build/blackjack/Stand";
 import { Double } from "@/build/blackjack/Double";
 
+import {Player} from "@/components/games/PlayerClasses"
+import {playerHand} from "@/components/games/PlayerClasses"
+
 import { use, useEffect, useState } from 'react';
 
 import { ToastContainer, toast } from 'react-toastify';
@@ -124,6 +127,9 @@ export function BlackJackTable({
     }
   })
 
+  var PLAYER1HAND = new playerHand(
+    gameStartProps.playerCards, 2,gameStartProps.betAmount, gameStartProps.playerGameCondition)
+  var PLAYER1 = new Player([PLAYER1HAND], "PLAYER1")
   // start of gameState
   useEffect(() => setPlayerCards(gameStartProps.playerCards), [gameStartProps])
   useEffect(() => setDealerCards(gameStartProps.dealerCards), [gameStartProps])
@@ -160,6 +166,7 @@ export function BlackJackTable({
   useEffect(() => setEndOfGame(false), [gameStartProps])
 
   return (
+    
     <div className="flex">
       <div className="
         w-3/4
@@ -174,7 +181,7 @@ export function BlackJackTable({
         </div>
         <hr className="border-2 border-slate-300/30 w-11/12 mx-auto border-dashed"></hr>
         <div>
-          <PlayerHandDisplay cards={playerCards} cardPoints={playerCount} />
+          <PlayerHandDisplay hands={PLAYER1.hands} cardPoints={playerCount} />
         </div>
       </div>
       <div className="w-1/4">
@@ -190,8 +197,10 @@ export function BlackJackTable({
               <form>
                 Bet:
                 {(endOfGame || playerGameCondition==3) && (<input
+
                   type="number"
                   className="w-10"
+                  min="10"
                   id="bet"
                   placeholder="10"
                   value={betAmount}
@@ -244,7 +253,6 @@ export function BlackJackTable({
                 disabled={endOfGame}
               />
             </div>
-
             <div className="grid col-span-2">
               <Button label={"SPLIT"} disabled={true} />
             </div>
