@@ -3,17 +3,17 @@
 import { GameCard } from "../../GameCard";
 import { CardBack } from "../../CardBack";
 
-interface DealerProps {
+interface DealerHandDisplayProps {
   cards?: [string, React.ReactNode, boolean][]
   cardPoints?: number
-  reveal: boolean
+  reveal?: boolean
 }
 
-export function Dealer ({
+export function DealerHandDisplay ({
   cards,
   cardPoints,
   reveal
-}: DealerProps) {
+}: DealerHandDisplayProps) {
   let maxCardBack = 2;
   let maxEmptySlots = 3;
 
